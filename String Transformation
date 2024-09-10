@@ -1,0 +1,25 @@
+The function accepts a string ‘str’ as its argument. The function needs to return the transformed string by replacing all occurrences of the character ‘a’ with the character ‘b’ and vice versa.
+
+Program:
+
+import java.util.*;
+public class StringTransformation {
+    public static String transformString(String str,char ch1,char ch2) {
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            if (charArray[i] == ch1)
+                charArray[i] = ch2;
+            else if (charArray[i] == ch2)
+                charArray[i] = ch1;
+        }
+        return new String(charArray);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String str =sc.next();
+        char ch1=sc.next().charAt(0);
+        char ch2=sc.next().charAt(0);
+        System.out.println(transformString(str,ch1,ch2));
+    }
+}
