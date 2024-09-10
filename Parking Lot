@@ -1,0 +1,55 @@
+Parking Lot
+
+Problem Description:
+
+The function accepts a character array ‘arr’ of size ‘n’ as its argument. Each element of ‘arr’ represents the status of a parking slot, where ‘S’ represents an empty slot and ‘X’ represents an occupied slot. The function needs to return the maximum number of cars that can be parked in the parking lot. It is assumed that two cars cannot occupy the same slot and cars can only park in consecutive empty slots.
+Input:
+n: 16
+arr: XXXSXXSXXSSXXSXX
+Output:
+7
+
+Program:
+
+public class ParkingLot {
+
+    // Method to calculate the maximum number of cars that can be parked
+    public static int maxCarsParked(char[] arr, int n) {
+        // Initialize count of cars that can be parked
+        int count = 0;
+        
+        // Variable to keep track of the length of the current sequence of empty slots
+        int currentSequenceLength = 0;
+        
+        // Loop through each slot in the parking lot
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 'S') {
+                // If slot is empty, increase the length of the current sequence
+                currentSequenceLength++;
+            } else {
+                // If slot is occupied, check if there was a sequence of empty slots
+                if (currentSequenceLength > 0) {
+                    // Add the number of cars that can be parked in this sequence
+                    count += currentSequenceLength;
+                    // Reset the sequence length
+                    currentSequenceLength = 0;
+                }
+            }
+        }
+        
+        // Check if the array ends with a sequence of empty slots
+        if (currentSequenceLength > 0) {
+            count += currentSequenceLength;
+        }
+        
+        return count;
+    }
+
+    public static void main(String[] args) {
+        char[] arr = {'X', 'X', 'X', 'S', 'X', 'X', 'S', 'X', 'X', 'S', 'S', 'X', 'X', 'S', 'X', 'X'};
+        int n = arr.length;
+
+        int result = maxCarsParked(arr, n);
+        System.out.println("Maximum number of cars that can be parked: " + result);
+    }
+}
